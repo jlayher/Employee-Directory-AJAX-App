@@ -1,14 +1,16 @@
+/*  John Layher JS-Project-5-Public-API-Requests
+ *  I want my project to be graded with the exceeds expectations requirements.
+ *  If my project does not meet these requirements, I would prefer for my
+ *  project to be rejected.
+ *  Additional information regarding Extra Credit CSS contained within the README file
+*/
 
-
+//Declare Global Variables
 const randomUserAPI = 'https://randomuser.me/api/?results=12&nat=us';
 const galleryDiv = document.getElementById('gallery');
 
-
-/*fetch API Data
-**convert to json
-**map data
-**give data to function that writes to DOM (writeHTML)
-**catch errors
+/* Function to fetch data from API, parse to JSON, and pass this data to
+ * the writeHTML function, while also catching any errors, and displaying an error msg.
 */
 function getEmployees() {
   fetch(randomUserAPI)
@@ -20,7 +22,8 @@ function getEmployees() {
     });
 }
 
-//function to map json data, and display array as HTML
+//function to map json data, and display array elements as HTML
+//also calls clickListener on every employee
 const writeHTML = (employeeData) => {
   const employees = employeeData.map((employee, index)=> {
     const html =
@@ -42,17 +45,11 @@ const writeHTML = (employeeData) => {
   })
 }
 
-
-
-
 //click event listener to display modal window
 function clickListener(employee, employeeData, index) {
     const modalWindow = document.getElementById(`${employee.name.first}${employee.name.last}`);
     modalWindow.addEventListener('click', e => createModalWindow(employee, employeeData, index));
 }
-
-
-
 
 //create modal window
 function createModalWindow(employee, employeeData, index) {
@@ -81,6 +78,8 @@ function createModalWindow(employee, employeeData, index) {
         </div>
     </div>`
 
+//Remove the Previous/Next Button if the employee's index is at the beginning or
+//end of the array of employees
     if(index === 0){
         modalDiv.insertAdjacentHTML('beforeend', modalHTML);
         document.querySelector('body').appendChild(modalDiv);
@@ -145,8 +144,9 @@ const prevEmployee = (employeeData, index) => {
   }
 }
 
-
 //Create and Append the Search Function
+//Uses 'search' function below to both filter employees as a user types, as well
+//as when they click the submit button (even though this is redundant and unnecessary)
 function createSearch() {
   const searchContainer = document.querySelector('.search-container');
   const form = `<form action="#" method="get">
@@ -168,7 +168,7 @@ function createSearch() {
 };
 createSearch();
 
-//search for users
+//function to search for users
 function search(input) {
   let search = input.toLowerCase();
   let employees = galleryDiv.children;
@@ -182,8 +182,6 @@ function search(input) {
     }
   }
 }
-
-
 
 //Main Function Call
 getEmployees();
