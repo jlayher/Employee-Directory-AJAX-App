@@ -45,7 +45,7 @@ const writeHTML = (employeeData) => {
   })
 }
 
-//click event listener to display modal window
+//click event listener to display modal window by calling createModalWindow function
 function clickListener(employee, employeeData, index) {
     const modalWindow = document.getElementById(`${employee.name.first}${employee.name.last}`);
     modalWindow.addEventListener('click', e => createModalWindow(employee, employeeData, index));
