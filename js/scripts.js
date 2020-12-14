@@ -54,7 +54,7 @@ function clickListener(employee, employeeData, index) {
 //create modal window
 function createModalWindow(employee, employeeData, index) {
   const modalDiv = document.createElement('div');
-  modalDiv.className = modal-container;
+  modalDiv.className = 'modal-container';
   const dob = formatBday(employee.dob.date);
 
   const modalHTML = `
