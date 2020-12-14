@@ -58,7 +58,7 @@ function createModalWindow(employee, employeeData, index) {
   const dob = formatBday(employee.dob.date);
 
   const modalHTML = `
-    div class="modal-container">
+    <div class="modal-container">
         <div class="modal">
             <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
             <div class="modal-info-container">
