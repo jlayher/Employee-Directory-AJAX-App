@@ -1,9 +1,4 @@
-/*  John Layher JS-Project-5-Public-API-Requests
- *  I want my project to be graded with the exceeds expectations requirements.
- *  If my project does not meet these requirements, I would prefer for my
- *  project to be rejected.
- *  Additional information regarding Extra Credit CSS contained within the README file
-*/
+/*  Employee Directory AJAX Application */
 
 //Declare Global Variables
 const randomUserAPI = 'https://randomuser.me/api/?results=12&nat=us';
@@ -15,7 +10,7 @@ const galleryDiv = document.getElementById('gallery');
 function getEmployees() {
   fetch(randomUserAPI)
     .then(result => result.json())
-    .then(employeeData => writeHTML(employeeData.results))
+    .then(employeeArray => writeHTML(employeeArray.results))
     .catch(err => {
       console.log(new Error(err));
       galleryDiv.innerHTML = '<h2>An error occured when fetching user data.</h2>';
@@ -24,8 +19,8 @@ function getEmployees() {
 
 //function to map json data, and display array elements as HTML
 //also calls clickListener on every employee
-const writeHTML = (employeeData) => {
-  const employees = employeeData.map((employee, index)=> {
+const writeHTML = (employeeArray) => {
+  const employees = employeeArray.map((employee, index)=> {
     const html =
           `<div class="card" id='${employee.name.first}${employee.name.last}'>
               <div class="card-img-container">
@@ -40,19 +35,19 @@ const writeHTML = (employeeData) => {
     return html;
   }).join('');
   galleryDiv.insertAdjacentHTML('beforeend',employees);
-  employeeData.map((employee, index) => {
-    clickListener(employee, employeeData, index)
+  employeeArray.map((employee, index) => {
+    clickListener(employee, employeeArray, index)
   })
 }
 
 //click event listener to display modal window by calling createModalWindow function
-function clickListener(employee, employeeData, index) {
+function clickListener(employee, employeeArray, index) {
     const modalWindow = document.getElementById(`${employee.name.first}${employee.name.last}`);
-    modalWindow.addEventListener('click', e => createModalWindow(employee, employeeData, index));
+    modalWindow.addEventListener('click', e => createModalWindow(employee, employeeArray, index));
 }
 
 //create modal window
-function createModalWindow(employee, employeeData, index) {
+function createModalWindow(employee, employeeArray, index) {
   const modalDiv = document.createElement('div');
   modalDiv.className = 'modal-container';
   const dob = formatBday(employee.dob.date);
@@ -91,7 +86,6 @@ function createModalWindow(employee, employeeData, index) {
     } else {
         modalDiv.insertAdjacentHTML('beforeend', modalHTML);
         document.querySelector('body').appendChild(modalDiv);
-        console.log(modalDiv);
     }
 
   //Add event listener for close button
@@ -104,14 +98,14 @@ function createModalWindow(employee, employeeData, index) {
   if(index<11){
     const nextButton = document.getElementById('modal-next').addEventListener('click', e => {
         modalDiv.remove();
-        nextEmployee(employeeData, index)
+        nextEmployee(employeeArray, index)
     })
   }
   //Add event listener for previous button
   if (index>0){
     const prevButton = document.getElementById('modal-prev').addEventListener('click', e => {
       modalDiv.remove();
-      prevEmployee(employeeData, index)
+      prevEmployee(employeeArray, index)
     })
   }
 }
@@ -125,28 +119,21 @@ const formatBday = (dob) => {
   return month + '/' + day + '/' + year;
 }
 
-
 //Next button
-const nextEmployee = (employeeData, index) => {
-  let employee = employeeData[index += 1];
-  createModalWindow(employee, employeeData, index);
-  if (index > 11){
-    document.getElementById('modal-next').style.display = 'none';
-  }
+const nextEmployee = (employeeArray, index) => {
+  let employee = employeeArray[index += 1];
+  createModalWindow(employee, employeeArray, index);
 }
 
 //Previous button
-const prevEmployee = (employeeData, index) => {
-  let employee = employeeData[index -= 1];
-  createModalWindow(employee, employeeData, index);
-  if (index < 0){
-    document.getElementById('modal-prev').style.display = 'none';
-  }
+const prevEmployee = (employeeArray, index) => {
+  let employee = employeeArray[index -= 1];
+  createModalWindow(employee, employeeArray, index);
 }
 
 //Create and Append the Search Function
 //Uses 'search' function below to both filter employees as a user types, as well
-//as when they click the submit button (even though this is redundant and unnecessary)
+//as when they click the submit button
 function createSearch() {
   const searchContainer = document.querySelector('.search-container');
   const form = `<form action="#" method="get">

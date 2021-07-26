@@ -1,30 +1,9 @@
-# JS-Project-5-Public-API-Requests
-I want my project to be graded with the exceeds expectations requirements.
-If my project does not meet these requirements, I would prefer for my
-project to be rejected.
+# Employee Directory AJAX Application
+
+This application uses AJAX to communicate with the Random User Generator API (https://randomuser.me/) to fetch data and display a list of 12 random "employees" from a fictional start-up company.
+
+The employee directory application Fetches data from the Random USer Generator API, and generates "cards" for each employee in the company.  Users can dynamically search for employees, click on an employee's card to reveal more information in a modal window, and navigate between employees within the modal window.
+
+To run this application, drag and drop the html file into your browser, or visit the live-link at https://jlayher.github.io/Employee-Directory-AJAX-App/
 
 
-
-
-
-
-Below are the CSS styles I added for the Exceeds Expectations Requirements.
-CSS:
-Added 'background-color: #E0E0E0' on the '.card' class to give it some subtle
-difference from the background color of the page.
-
-Added 'box-shadow: 1px 1px 1px 1px #888888' to 'modal-btn-container .btn'
-to add a little bit of subtle "depth" to the buttons
-
-Added 'box-shadow: 1px 1px 1px 1px #888888' to the '.modal' class.
-Similar to the modal-btn-container .btn I did this to add some depth, and while
-I'll be doing something similar to this on a few other elements, I bet there are better ways to
-do what I actually envision, but I'm not too familiar with CSS and the project
-guidelines specify what I need to do, so I guess styling will be something I explore
-at a later date.
-
-Added 'box-shadow: 2px 2px grey' to the modal-btn-container class.  Just Added
-for consistency within the modal window, but tried some different property
-values for my own learning purposes.  
-
-You can find all of these additions at the bottom of the class they are associated with
